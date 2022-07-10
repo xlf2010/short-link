@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "snowFlake.workerId",
+      "type": "java.lang.String",
+      "description": "Description for snowFlake.workerId."
+    },
+    {
+      "name": "snowFlake.centerId",
+      "type": "java.lang.String",
+      "description": "Description for snowFlake.centerId."
+    }
+  ] }
