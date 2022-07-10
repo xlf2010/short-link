@@ -15,4 +15,8 @@ public interface ShortLinkRepository extends JpaRepository<LinkInfoEntity, Long>
     @Modifying
     @Query(value = "update link_info set status = ?2 where id = ?1", nativeQuery = true)
     int updateStatus(@Param("id") Long id, @Param("status") Integer status);
+
+    @Modifying
+    @Query(value = "update link_info set origin_link = ?2 where id = ?1", nativeQuery = true)
+    int updateOriginLink(@Param("id") Long id, @Param("originLink") String originLink);
 }

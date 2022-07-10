@@ -10,6 +10,7 @@ import com.xlf.util.JsonUtil;
 import com.xlf.util.SnowflakeUtil;
 import com.xlf.vo.response.AddShortLinkRsp;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -94,5 +95,20 @@ public class ShortLinkServiceImpl implements ShortLinkService {
             return JsonUtil.fromJson(entity, LinkInfoEntity.class);
         }
         return null;
+    }
+
+    @Override
+    public void update(String shortLink, String originLink) {
+        LinkInfoEntity entity = findLink(shortLink);
+        if (Objects.isNull(entity)) {
+            throw ErrorCodeEnum.SHORT_LINK_NOT_EXIST.newException();
+        }
+        if (StringUtils.equals(entity.getOriginLink(), originLink)) {
+            return;
+        }
+        entity.setOriginLink(originLink);
+        shortLinkRepository.updateOriginLink(entity.getId(), entity.getOriginLink());
+        String cacheKey = SHORT_LINK_CACHE_PREFIX + entity.getShortLink();
+        stringRedisTemplate.opsForValue().set(cacheKey, JsonUtil.toJsonString(entity));
     }
 }

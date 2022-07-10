@@ -11,7 +11,9 @@ public interface ShortLinkService {
      */
     AddShortLinkRsp addShortLink(String url, Long expire);
 
-     String findOriginLink(String shortLink);
+    String findOriginLink(String shortLink);
 
     void delete(String shortLink);
+
+    void update(String shortLink, String originLink);
 }

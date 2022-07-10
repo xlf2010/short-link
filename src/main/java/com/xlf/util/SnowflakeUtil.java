@@ -1,7 +1,7 @@
 package com.xlf.util;
 
 public class SnowflakeUtil {
-    private final static long EPOCH = 1656604800000L;
+    private final static long EPOCH = 1657460985000L;
 
     /**
      * 0L

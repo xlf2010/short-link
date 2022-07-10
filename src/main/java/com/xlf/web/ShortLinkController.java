@@ -20,14 +20,21 @@ public class ShortLinkController {
 
     @PostMapping(value = "/shor-link/add")
     @ResponseBody
-    public ApiResult<AddShortLinkRsp> addShortLink(@RequestBody @Valid AddShortLinkReq req) {
+    public ApiResult<AddShortLinkRsp> add(@RequestBody @Valid AddShortLinkReq req) {
         return ApiResult.success(shortLinkService.addShortLink(req.getUrl(), req.getExpireDate()));
     }
 
     @PostMapping(value = "/shor-link/delete")
     @ResponseBody
-    public ApiResult<Object> deleteShortLink(@RequestParam("shortLink") String shortLink) {
+    public ApiResult<Object> delete(@RequestParam("shortLink") String shortLink) {
         shortLinkService.delete(shortLink);
+        return ApiResult.success();
+    }
+
+    @PostMapping(value = "/shor-link/update")
+    @ResponseBody
+    public ApiResult<Object> update(@RequestParam("shortLink") String shortLink, @RequestParam("originLink") String originLink) {
+        shortLinkService.update(shortLink, originLink);
         return ApiResult.success();
     }
 

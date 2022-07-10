@@ -53,4 +53,18 @@ public class ShortLinkControllerTest extends BaseTest {
         Assert.notNull(rsp, "rsp can't be null");
     }
 
+    @Test
+    public void testUpdateShortLink() throws Exception {
+        AddShortLinkRsp addShortLinkRsp = addShortLinkRsp();
+        String url = "/shor-link/update";
+        LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("shortLink", addShortLinkRsp.getShortLink());
+        params.add("originLink", "https://www.google.com");
+        String json = post(url, params);
+
+        ApiResult<Object> rsp = JsonUtil.fromJson(json, new TypeReference<ApiResult<Object>>() {
+        });
+        Assert.notNull(rsp, "rsp can't be null");
+    }
+
 }
