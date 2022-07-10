@@ -14,7 +14,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
-@RequestMapping()
 public class ShortLinkController {
     @Resource
     private ShortLinkService shortLinkService;
